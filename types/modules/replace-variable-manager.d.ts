@@ -2,6 +2,25 @@ import { Effects } from "../effects";
 import TriggersObject = Effects.TriggersObject;
 import Trigger = Effects.Trigger;
 
+/**
+ * The categories of variables
+ */
+export enum VariableCategory {
+    COMMON = "common",
+    TRIGGER = "trigger based",
+    USER = "user based",
+    TEXT = "text",
+    NUMBERS = "numbers",
+    ADVANCED = "advanced",
+}
+/**
+ * The possible output types of variables
+ */
+export enum VariableOutputDataType {
+    TEXT = "text",
+    NUMBER = "number",
+    ALL = "ALL",
+}
 export type ReplaceVariable = {
     definition: {
         handle: string;
@@ -12,7 +31,17 @@ export type ReplaceVariable = {
             description: string;
         }>;
         triggers?: TriggersObject;
-        possibleDataOutput: Array<"text" | "number">;
+        categories?:
+            | VariableCategory[]
+            | Array<
+                  | "common"
+                  | "trigger based"
+                  | "user based"
+                  | "text"
+                  | "numbers"
+                  | "advanced"
+              >;
+        possibleDataOutput: VariableOutputDataType[] | Array<"text" | "number">; // make this backwards compatible with prior code
     };
     evaluator(trigger: Trigger, ...args: any[]): any;
 };
