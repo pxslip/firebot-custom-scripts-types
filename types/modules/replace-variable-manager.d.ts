@@ -13,6 +13,7 @@ export enum VariableCategory {
     NUMBERS = "numbers",
     ADVANCED = "advanced",
 }
+
 /**
  * The possible output types of variables
  */
@@ -21,6 +22,10 @@ export enum VariableOutputDataType {
     NUMBER = "number",
     ALL = "ALL",
 }
+
+/**
+ * The type for registering a new replacement variable via {@link ReplaceVariableManager.registerReplaceVariable}
+ */
 export type ReplaceVariable = {
     definition: {
         handle: string;
@@ -46,6 +51,18 @@ export type ReplaceVariable = {
     evaluator(trigger: Trigger, ...args: any[]): any;
 };
 
+/**
+ * The type for the replace variable manager, used to register new replacement variables
+ *
+ * ```ts
+ * run: (runRequest) {
+ *  runRequest.modules.replaceVariableManager({
+ *      definition: {...},
+ *      ...
+ *  });
+ * }
+ * ```
+ */
 export type ReplaceVariableManager = {
     registerReplaceVariable(replaceVariable: ReplaceVariable): void;
 };
